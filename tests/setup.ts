@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: '.env.test' });
 
 const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/testdb";
 
@@ -18,7 +18,6 @@ beforeEach(async () => {
   const db = mongoose.connection.db;
   if (db) {
     const collections = await db.collections();
-    console.log(collections);
     for (const collection of collections) {
       await collection.deleteMany({});
     }
@@ -26,6 +25,5 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  // Close DB connection after tests
   await mongoose.connection.close();
 });

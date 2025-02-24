@@ -37,7 +37,7 @@ app.use(
 );
 connectDB();
 
-app.use("/api", postsRoutes);
+app.use("/api", [postsRoutes]);
 
 app.use((err: any, req: express.Request, res: express.Response) => {
   res.status(err.status || 500).json({
