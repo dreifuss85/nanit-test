@@ -1,0 +1,43 @@
+openapi: 3.0.0
+info:
+  title: Posts API
+  version: 1.0.0
+  description: API for managing posts
+components:
+  schemas:
+    CreatePost:
+      type: object
+      properties:
+        content:
+          type: string
+      required:
+        - content
+
+paths:
+  /api/post:
+    post:
+      summary: Creates a new post
+      tags:
+        - Post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePost'
+      responses:
+        201:
+          description: Post created successfully
+    get:
+      summary: Get all posts
+      tags:
+        - Post
+      responses:
+        200:
+          description: List of all posts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreatePost'
